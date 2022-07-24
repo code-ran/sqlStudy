@@ -1,0 +1,50 @@
+SHOW DATABASES;
+use sqllearning;
+show TABLES
+
+SELECT * FROM milk_tea as m;
+
+---1、CONCAT(str1,str2,...) 将多个字段拼接为一个字段的：（1）组合多列信息为一列 （2）对列的信息进行补充
+SELECT m.*, CONCAT(prod_name,'(',net_w,')') AS naichaInfo FROM milk_tea as m;
+
+--这种拼接如果遇到某一个属性的行为null，那么该行就为null 
+SELECT m.*, CONCAT(prod_name,'是',net_w,'待付',sale_price,'元') AS naichaInfo FROM milk_tea as m;
+
+
+---2、CONCAT_WS(separator,str1,str2,...)指定统一的拼接符: (1)多字段拼接，字段间使用同样的拼接符
+--- 注意：使用这个函数会自动跳过null
+SELECT m.*, CONCAT_WS('是',prod_name,net_w,sale_price) as naichaInfo FROM milk_tea as m;
+
+
+---3、DISTINCT 对内容进行去重，取出不重复的列值： （1） 列中有多个相同的值，查看值的种类
+
+SELECT DISTINCT valid_month FROM milk_tea as m;
+
+
+---4、ORDER BY 对查询结果进行排序。非必须子句，不能单独使用。
+---注意必须是查询语句的最后一条子句
+--- 升序排序 ASC(默认)
+--- 降序排序 DESC
+
+SELECT * FROM milk_tea as m ORDER BY pro_date DESC;
+SELECT * FROM milk_tea as m ORDER BY pro_date ASC;
+
+---中文文本排序
+SELECT * FROM milk_tea as m ORDER BY CONVERT(prod_name USING gbk);
+
+---根据多字段排序
+SELECT * FROM milk_tea as m ORDER BY valid_month DESC,sale_price ASC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
